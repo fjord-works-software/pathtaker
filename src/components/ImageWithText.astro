@@ -12,7 +12,7 @@ const { src, alt = '', imageLeft = true } = Astro.props;
   <div class="max-w-6xl mx-auto px-6">
     <div class:list={['flex flex-col md:flex-row gap-10 items-center', { 'md:flex-row-reverse': !imageLeft }]}>
       <div class="w-full md:w-1/2">
-        <img src={src} alt={alt} class="w-full h-auto object-cover" loading="lazy" />
+        <img src={src} alt={alt} class="w-full h-auto object-cover rounded-xl" loading="lazy" />
       </div>
       <div class="w-full md:w-1/2 text-brown">
         <slot />

@@ -12,6 +12,8 @@ const { Content } = await render(home);
 
 <BaseLayout title="Pathtaker">
   <main>
+    <HeroBanner src="/images/IMG_4614.jpg" alt="Mountain landscape" loading="eager" height="600px" />
+
     <RichText>
       <h2 class="text-4xl md:text-5xl mb-6">{home.data.intro_heading}</h2>
       <p class="text-lg leading-relaxed max-w-2xl mx-auto">
@@ -27,7 +29,5 @@ const { Content } = await render(home);
         <Content />
       </div>
     </ImageWithText>
-
-    <HeroBanner src="/images/IMG_4614.jpg" alt="Mountain landscape" />
   </main>
 </BaseLayout>

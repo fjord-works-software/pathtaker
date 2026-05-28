@@ -27,6 +27,8 @@ const fullTitle = title === 'Pathtaker' ? title : `${title} – Pathtaker`;
     <link rel="canonical" href={canonicalURL} />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
 
     <meta property="og:site_name" content="Pathtaker" />
     <meta property="og:url" content={canonicalURL} />
