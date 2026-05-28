@@ -13,7 +13,7 @@ const { Content } = await render(member);
   description={`Meet ${member.data.name} — Treasurer of Pathtaker.`}
 >
   <main>
-    <ImageWithText src={member.data.photo} alt={member.data.name}>
+    <ImageWithText src={member.data.photo} alt={member.data.name} imageLeft={false}>
       <h1 class="text-3xl md:text-4xl mb-3">{member.data.name}</h1>
       <p class="text-lg mb-4 text-brown/70">{member.data.title}</p>
       <div class="leading-relaxed space-y-4">
