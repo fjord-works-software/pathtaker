@@ -23,6 +23,43 @@ media_folder: public/images
 public_folder: /images
 
 collections:
+  - name: home
+    label: Home Page
+    files:
+      - name: home
+        label: Home Page
+        file: src/content/pages/home.md
+        fields:
+          - { name: intro_heading, label: Welcome Heading, widget: string }
+          - { name: intro_body, label: Welcome Body, widget: text }
+          - { name: image_text_heading, label: Image Section Heading, widget: string }
+          - { name: body, label: Image Section Body, widget: markdown }
+
+  - name: services
+    label: Services Page
+    files:
+      - name: services
+        label: Services Page
+        file: src/content/pages/services.md
+        fields:
+          - { name: page_heading, label: Page Heading, widget: string }
+          - { name: tagline, label: Tagline, widget: string }
+          - { name: quote, label: Quote, widget: text }
+          - { name: body, label: Services Content, widget: markdown }
+
+  - name: donate
+    label: Donate Page
+    files:
+      - name: donate
+        label: Donate Page
+        file: src/content/pages/donate.md
+        fields:
+          - { name: donate_heading, label: Heading, widget: string }
+          - { name: donate_intro, label: Intro Paragraph, widget: text }
+          - { name: donate_disclaimer, label: Disclaimer, widget: string }
+          - { name: paypal_button_id, label: PayPal Button ID, widget: string }
+          - { name: donate_button_label, label: Button Label, widget: string }
+
   - name: team
     label: Board Members
     folder: src/content/team
@@ -34,34 +71,3 @@ collections:
       - { name: title, label: Title, widget: string }
       - { name: photo, label: Photo, widget: image }
       - { name: body, label: Bio, widget: markdown }
-
-  - name: pages
-    label: Pages
-    files:
-      - name: home
-        label: Home Page
-        file: src/content/pages/home.md
-        fields:
-          - { name: intro_heading, label: Welcome Heading, widget: string }
-          - { name: intro_body, label: Welcome Body, widget: text }
-          - { name: image_text_heading, label: Image Section Heading, widget: string }
-          - { name: body, label: Image Section Body, widget: markdown }
-
-      - name: services
-        label: Services Page
-        file: src/content/pages/services.md
-        fields:
-          - { name: page_heading, label: Page Heading, widget: string }
-          - { name: tagline, label: Tagline, widget: string }
-          - { name: quote, label: Quote, widget: text }
-          - { name: body, label: Services Content, widget: markdown }
-
-      - name: donate
-        label: Donate Page
-        file: src/content/pages/donate.md
-        fields:
-          - { name: donate_heading, label: Heading, widget: string }
-          - { name: donate_intro, label: Intro Paragraph, widget: text }
-          - { name: donate_disclaimer, label: Disclaimer, widget: string }
-          - { name: paypal_button_id, label: PayPal Button ID, widget: string }
-          - { name: donate_button_label, label: Button Label, widget: string }
