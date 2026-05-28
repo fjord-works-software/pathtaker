@@ -22,6 +22,8 @@ const boardLinks = [
         <a href={href} class="text-sm text-brown hover:text-brown-dark tracking-body transition-colors">{label}</a>
       ))}
 
+      <a href="/donate" class="bg-brown text-cream px-5 py-2 rounded-pill text-sm tracking-body hover:bg-brown-dark transition-colors">Donate</a>
+
       <div class="relative group">
         <button
           class="flex items-center gap-1 text-sm text-brown hover:text-brown-dark tracking-body transition-colors cursor-pointer"
@@ -64,6 +66,8 @@ const boardLinks = [
     {navLinks.map(({ label, href }) => (
       <a href={href} class="py-3 text-brown border-b border-brown/10 tracking-body">{label}</a>
     ))}
+
+    <a href="/donate" class="py-3 text-brown border-b border-brown/10 tracking-body font-bold">Donate</a>
 
     <details class="group">
       <summary class="flex items-center justify-between py-3 text-brown border-b border-brown/10 tracking-body cursor-pointer list-none">

@@ -55,3 +55,13 @@ collections:
           - { name: tagline, label: Tagline, widget: string }
           - { name: quote, label: Quote, widget: text }
           - { name: body, label: Services Content, widget: markdown }
+
+      - name: donate
+        label: Donate Page
+        file: src/content/pages/donate.md
+        fields:
+          - { name: donate_heading, label: Heading, widget: string }
+          - { name: donate_intro, label: Intro Paragraph, widget: text }
+          - { name: donate_disclaimer, label: Disclaimer, widget: string }
+          - { name: paypal_button_id, label: PayPal Button ID, widget: string }
+          - { name: donate_button_label, label: Button Label, widget: string }

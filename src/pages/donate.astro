@@ -1,0 +1,36 @@
+---
+import { getEntry } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const entry = await getEntry('pages', 'donate');
+if (!entry) throw new Error('Missing content: pages/donate.md');
+const { donate_heading, donate_intro, donate_disclaimer, paypal_button_id, donate_button_label } = entry.data;
+---
+
+<BaseLayout
+  title="Donate"
+  description="Support Pathtaker's mission of providing mental health intensives to those who need deeper healing."
+>
+  <main class="max-w-2xl mx-auto px-6 py-12 md:py-20 text-center">
+    <h1 class="text-4xl md:text-5xl mb-6">{donate_heading}</h1>
+
+    <p class="text-lg leading-relaxed mb-4">{donate_intro}</p>
+
+    <p class="leading-relaxed text-brown/70 mb-12">{donate_disclaimer}</p>
+
+    <form
+      action="https://www.paypal.com/donate"
+      method="post"
+      target="_top"
+      class="inline-block"
+    >
+      <input type="hidden" name="hosted_button_id" value={paypal_button_id} />
+      <button
+        type="submit"
+        class="bg-brown text-cream px-10 py-4 rounded-pill text-base tracking-body hover:bg-brown-dark transition-colors cursor-pointer"
+      >
+        {donate_button_label}
+      </button>
+    </form>
+  </main>
+</BaseLayout>
