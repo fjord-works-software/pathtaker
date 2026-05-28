@@ -1,0 +1,18 @@
+---
+interface Props {
+  center?: boolean;
+  narrow?: boolean;
+}
+
+const { center = true, narrow = false } = Astro.props;
+---
+
+<div class="py-10 md:py-16">
+  <div class:list={[
+    'mx-auto px-6',
+    center ? 'text-center' : '',
+    narrow ? 'max-w-3xl' : 'max-w-4xl',
+  ]}>
+    <slot />
+  </div>
+</div>

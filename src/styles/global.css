@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #FDFBF6;
+  --color-brown: #72513C;
+  --color-brown-dark: #562c1c;
+  --font-family-body: 'Figtree', sans-serif;
+  --font-family-heading: 'Libre Baskerville', serif;
+  --radius-pill: 40px;
+  --letter-spacing-body: 0.06rem;
+}
+
+@font-face {
+  font-family: 'Figtree';
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/figtree-regular.woff2') format('woff2'),
+       url('/fonts/figtree-regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Figtree';
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/figtree-bold.woff2') format('woff2'),
+       url('/fonts/figtree-bold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Figtree';
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  src: url('/fonts/figtree-italic.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Libre Baskerville';
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/libre-baskerville-regular.woff2') format('woff2'),
+       url('/fonts/libre-baskerville-regular.woff') format('woff');
+}
+
+@layer base {
+  html {
+    background-color: var(--color-cream);
+    color: var(--color-brown);
+    box-sizing: border-box;
+  }
+
+  *, *::before, *::after {
+    box-sizing: inherit;
+  }
+
+  body {
+    font-family: var(--font-family-body);
+    font-weight: 400;
+    letter-spacing: var(--letter-spacing-body);
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 100%;
+    margin: 0;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-heading);
+    font-weight: 400;
+    color: var(--color-brown);
+  }
+}

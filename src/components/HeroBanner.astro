@@ -1,0 +1,24 @@
+---
+interface Props {
+  src: string;
+  alt?: string;
+  height?: string;
+  loading?: 'eager' | 'lazy';
+}
+
+const { src, alt = '', height = '70vh', loading = 'lazy' } = Astro.props;
+---
+
+<div class="relative w-full overflow-hidden" style={`height: ${height};`}>
+  <img
+    src={src}
+    alt={alt}
+    loading={loading}
+    class="w-full h-full object-cover"
+  />
+  {Astro.slots.has('default') && (
+    <div class="absolute inset-0 flex items-center justify-center">
+      <slot />
+    </div>
+  )}
+</div>

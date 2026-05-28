@@ -1,0 +1,22 @@
+---
+interface Props {
+  src: string;
+  alt?: string;
+  imageLeft?: boolean;
+}
+
+const { src, alt = '', imageLeft = true } = Astro.props;
+---
+
+<div class="py-10 md:py-14">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class:list={['flex flex-col md:flex-row gap-10 items-center', { 'md:flex-row-reverse': !imageLeft }]}>
+      <div class="w-full md:w-1/2">
+        <img src={src} alt={alt} class="w-full h-auto object-cover" loading="lazy" />
+      </div>
+      <div class="w-full md:w-1/2 text-brown">
+        <slot />
+      </div>
+    </div>
+  </div>
+</div>
