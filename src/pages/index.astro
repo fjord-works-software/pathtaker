@@ -1,38 +1,30 @@
 ---
+import { getEntry, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroBanner from '../components/HeroBanner.astro';
 import ImageWithText from '../components/ImageWithText.astro';
 import RichText from '../components/RichText.astro';
+
+const home = await getEntry('pages', 'home');
+if (!home) throw new Error('Missing content: pages/home.md');
+const { Content } = await render(home);
 ---
 
 <BaseLayout title="Pathtaker">
   <main>
     <RichText>
-      <h2 class="text-4xl md:text-5xl mb-6">Welcome</h2>
+      <h2 class="text-4xl md:text-5xl mb-6">{home.data.intro_heading}</h2>
       <p class="text-lg leading-relaxed max-w-2xl mx-auto">
-        Pathtaker is a 501(c)(3) nonprofit organization dedicated to providing mental health intensives
-        for individuals who require deeper, more comprehensive support than traditional one-hour therapy
-        sessions can offer.
+        {home.data.intro_body}
       </p>
     </RichText>
 
     <ImageWithText src="/images/IMG_5073.jpg" alt="Nature therapy setting">
       <h2 class="text-2xl md:text-3xl mb-5">
-        <strong>Let NATURE be a part of your healing journey!</strong>
+        <strong>{home.data.image_text_heading}</strong>
       </h2>
       <div class="leading-relaxed space-y-4">
-        <p>
-          <strong>Choose your setting</strong>—whether it's the quiet of a secluded campsite,
-          the rugged beauty of the backcountry, or the comfort of a therapy office.
-        </p>
-        <p>
-          Mental health intensives offer a powerful alternative to traditional one-hour sessions,
-          helping you gain meaningful traction in your healing journey.
-        </p>
-        <p>
-          Step into your story with courage. Take ownership of your mental wellness and discover
-          what's possible when time, presence, and intention align.
-        </p>
+        <Content />
       </div>
     </ImageWithText>
 
