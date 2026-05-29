@@ -4,6 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroBanner from '../components/HeroBanner.astro';
 import ImageWithText from '../components/ImageWithText.astro';
 import RichText from '../components/RichText.astro';
+import { url } from '../utils/url';
 
 const home = await getEntry('pages', 'home');
 if (!home) throw new Error('Missing content: pages/home.md');
@@ -12,7 +13,7 @@ const { Content } = await render(home);
 
 <BaseLayout title="Pathtaker">
   <main>
-    <HeroBanner src="/images/IMG_4614.jpg" alt="Mountain landscape" loading="eager" height="600px" />
+    <HeroBanner src={url('/images/IMG_4614.jpg')} alt="Mountain landscape" loading="eager" height="600px" />
 
     <RichText>
       <h2 class="text-4xl md:text-5xl mb-6">{home.data.intro_heading}</h2>
@@ -21,7 +22,7 @@ const { Content } = await render(home);
       </p>
     </RichText>
 
-    <ImageWithText src="/images/IMG_5073.jpg" alt="Nature therapy setting">
+    <ImageWithText src={url('/images/IMG_5073.jpg')} alt="Nature therapy setting">
       <h2 class="text-2xl md:text-3xl mb-5">
         <strong>{home.data.image_text_heading}</strong>
       </h2>

@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { url } from '../utils/url';
 
 interface Props {
   title: string;
@@ -28,7 +29,7 @@ const fullTitle = title === 'Pathtaker' ? title : `${title} – Pathtaker`;
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <meta name="robots" content="index, follow" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="sitemap" href={url('/sitemap-index.xml')} />
 
     <meta property="og:site_name" content="Pathtaker" />
     <meta property="og:url" content={canonicalURL} />
@@ -41,8 +42,8 @@ const fullTitle = title === 'Pathtaker' ? title : `${title} – Pathtaker`;
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
 
-    <link rel="preload" as="font" href="/fonts/figtree-regular.woff2" type="font/woff2" crossorigin />
-    <link rel="preload" as="font" href="/fonts/libre-baskerville-regular.woff2" type="font/woff2" crossorigin />
+    <link rel="preload" as="font" href={url('/fonts/figtree-regular.woff2')} type="font/woff2" crossorigin />
+    <link rel="preload" as="font" href={url('/fonts/libre-baskerville-regular.woff2')} type="font/woff2" crossorigin />
   </head>
   <body>
     <Header />

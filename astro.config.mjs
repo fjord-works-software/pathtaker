@@ -5,6 +5,7 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   output: 'static',
   site: 'https://pathtaker.org',
+  base: '/pathtaker/',
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],

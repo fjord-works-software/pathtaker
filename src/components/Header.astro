@@ -1,24 +1,26 @@
 ---
+import { url } from '../utils/url';
+
 const navLinks = [
-  { label: 'Home', href: '/' },
-  { label: 'Services', href: '/services' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Home', href: url('/') },
+  { label: 'Services', href: url('/services') },
+  { label: 'Contact', href: url('/contact') },
 ];
 
 ---
 
 <header class="sticky top-0 z-50 bg-cream border-b border-brown/20">
   <div class="max-w-6xl mx-auto px-6 flex items-center justify-between h-16 md:h-20">
-    <a href="/" class="font-heading text-2xl text-brown">Pathtaker</a>
+    <a href={url('/')} class="font-heading text-2xl text-brown">Pathtaker</a>
 
     <nav class="hidden md:flex items-center gap-8" aria-label="Main">
       {navLinks.map(({ label, href }) => (
         <a href={href} class="text-sm text-brown hover:text-brown-dark tracking-body transition-colors">{label}</a>
       ))}
 
-      <a href="/donate" class="bg-brown text-cream px-5 py-2 rounded-pill text-sm tracking-body hover:bg-brown-dark transition-colors">Donate</a>
+      <a href={url('/donate')} class="bg-brown text-cream px-5 py-2 rounded-pill text-sm tracking-body hover:bg-brown-dark transition-colors">Donate</a>
 
-      <a href="/board" class="text-sm text-brown hover:text-brown-dark tracking-body transition-colors">Meet The Board</a>
+      <a href={url('/board')} class="text-sm text-brown hover:text-brown-dark tracking-body transition-colors">Meet The Board</a>
     </nav>
 
     <button id="menu-open" class="md:hidden p-2 text-brown" aria-label="Open menu" aria-expanded="false">
@@ -46,9 +48,9 @@ const navLinks = [
       <a href={href} class="py-3 text-brown border-b border-brown/10 tracking-body">{label}</a>
     ))}
 
-    <a href="/donate" class="py-3 text-brown border-b border-brown/10 tracking-body font-bold">Donate</a>
+    <a href={url('/donate')} class="py-3 text-brown border-b border-brown/10 tracking-body font-bold">Donate</a>
 
-    <a href="/board" class="py-3 text-brown border-b border-brown/10 tracking-body">Meet The Board</a>
+    <a href={url('/board')} class="py-3 text-brown border-b border-brown/10 tracking-body">Meet The Board</a>
   </nav>
 </aside>
 

@@ -1,6 +1,7 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { url } from '../../utils/url';
 
 const entry = await getEntry('pages', 'board');
 const heading = entry?.data.page_heading ?? 'Meet the Board';
@@ -20,12 +21,12 @@ const members = (await getCollection('team')).sort((a, b) => a.data.order - b.da
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
       {members.map(member => (
         <a
-          href={`/board/${member.id}`}
+          href={url(`/board/${member.id}`)}
           class="group flex flex-col items-center text-center gap-4 p-6 rounded-2xl border border-brown/10 hover:border-brown/30 hover:shadow-md transition-all duration-200"
         >
           <div class="w-40 h-40 rounded-full overflow-hidden shrink-0">
             <img
-              src={member.data.photo}
+              src={url(member.data.photo)}
               alt={member.data.name}
               class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
               loading="lazy"
