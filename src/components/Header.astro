@@ -52,7 +52,7 @@ const boardLinks = teamMembers
 
 <div id="drawer-overlay" class="fixed inset-0 bg-black/30 z-40 opacity-0 pointer-events-none transition-opacity md:hidden" aria-hidden="true"></div>
 
-<aside id="menu-drawer" class="fixed top-0 left-0 h-full w-72 bg-cream z-50 -translate-x-full transition-transform duration-300 md:hidden shadow-xl" aria-label="Mobile navigation">
+<aside id="menu-drawer" class="fixed top-0 right-0 h-full w-72 bg-cream z-50 translate-x-full transition-transform duration-300 md:hidden shadow-xl" aria-label="Mobile navigation">
   <div class="flex items-center justify-between px-6 h-16 border-b border-brown/20">
     <span class="font-heading text-xl text-brown">Pathtaker</span>
     <button id="menu-close" class="p-2 text-brown" aria-label="Close menu">
@@ -92,7 +92,7 @@ const boardLinks = teamMembers
   const overlay = document.getElementById('drawer-overlay');
 
   function openMenu() {
-    drawer?.classList.replace('-translate-x-full', 'translate-x-0');
+    drawer?.classList.replace('translate-x-full', 'translate-x-0');
     overlay?.classList.replace('opacity-0', 'opacity-100');
     overlay?.classList.replace('pointer-events-none', 'pointer-events-auto');
     openBtn?.setAttribute('aria-expanded', 'true');
@@ -100,7 +100,7 @@ const boardLinks = teamMembers
   }
 
   function closeMenu() {
-    drawer?.classList.replace('translate-x-0', '-translate-x-full');
+    drawer?.classList.replace('translate-x-0', 'translate-x-full');
     overlay?.classList.replace('opacity-100', 'opacity-0');
     overlay?.classList.replace('pointer-events-auto', 'pointer-events-none');
     openBtn?.setAttribute('aria-expanded', 'false');
