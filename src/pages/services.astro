@@ -25,7 +25,7 @@ const { page_heading, tagline, quote, services = [], approach_heading, approach_
       </div>
 
       <div class="w-full md:w-1/2 flex flex-col justify-center">
-        <h1 class="text-4xl md:text-5xl text-brown-dark mb-4">{page_heading}</h1>
+        <h1 class="text-4xl md:text-5xl mb-4">{page_heading}</h1>
         <p class="text-lg leading-relaxed text-brown/70 mb-8">{tagline}</p>
         <blockquote class="border-l-4 border-brown/30 pl-6 italic text-lg leading-relaxed text-brown/80">
           "{quote}"
@@ -35,7 +35,7 @@ const { page_heading, tagline, quote, services = [], approach_heading, approach_
 
     {(approach_heading || modalities.length > 0) && (
       <div class="bg-brown/5 rounded-2xl px-8 py-8 mb-10">
-        {approach_heading && <h2 class="font-heading text-2xl text-brown-dark mb-2">{approach_heading}</h2>}
+        {approach_heading && <h2 class="text-2xl mb-2">{approach_heading}</h2>}
         {approach_intro && <p class="text-brown/70 tracking-body mb-5">{approach_intro}</p>}
         {modalities.length > 0 && (
           <ul class="flex flex-col gap-2">
@@ -52,7 +52,7 @@ const { page_heading, tagline, quote, services = [], approach_heading, approach_
         {services.map(service => (
           <div class="flex flex-col gap-3 p-6 rounded-2xl border border-brown/15 hover:border-brown/30 hover:shadow-sm transition-all duration-200">
             {service.icon && <span class="text-3xl">{service.icon}</span>}
-            <h2 class="font-heading text-xl text-brown-dark">{service.name}</h2>
+            <h2 class="text-xl">{service.name}</h2>
             <p class="text-brown/70 leading-relaxed tracking-body">{service.description}</p>
           </div>
         ))}
@@ -60,7 +60,7 @@ const { page_heading, tagline, quote, services = [], approach_heading, approach_
     )}
 
     {cta && (
-      <a href={url('/contact')} class="block text-center text-brown font-heading text-xl hover:text-brown-dark transition-colors">{cta}</a>
+      <a href={url('/contact')} class="block text-center text-brown text-lg tracking-body hover:text-brown-dark transition-colors">{cta}</a>
     )}
 
   </main>
