@@ -45,7 +45,20 @@ collections:
           - { name: page_heading, label: Page Heading, widget: string }
           - { name: tagline, label: Tagline, widget: string }
           - { name: quote, label: Quote, widget: text }
-          - { name: body, label: Services Content, widget: markdown }
+          - { name: approach_heading, label: Approach Section Heading, widget: string }
+          - { name: approach_intro, label: Approach Intro, widget: string }
+          - name: modalities
+            label: Therapy Modalities
+            widget: list
+            field: { name: modality, label: Modality, widget: string }
+          - name: services
+            label: Services
+            widget: list
+            fields:
+              - { name: icon, label: Icon (emoji), widget: string, required: false }
+              - { name: name, label: Service Name, widget: string }
+              - { name: description, label: Description, widget: text }
+          - { name: cta, label: Call to Action Text, widget: string }
 
   - name: contact
     label: Contact Page

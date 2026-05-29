@@ -25,6 +25,15 @@ const pages = defineCollection({
     page_heading: z.string().optional(),
     tagline: z.string().optional(),
     quote: z.string().optional(),
+    services: z.array(z.object({
+      icon: z.string().optional(),
+      name: z.string(),
+      description: z.string(),
+    })).optional(),
+    approach_heading: z.string().optional(),
+    approach_intro: z.string().optional(),
+    modalities: z.array(z.string()).optional(),
+    cta: z.string().optional(),
     // donate
     donate_heading: z.string().optional(),
     donate_intro: z.string().optional(),
