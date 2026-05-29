@@ -79,6 +79,16 @@ collections:
           - { name: paypal_button_id, label: PayPal Button ID, widget: string }
           - { name: donate_button_label, label: Button Label, widget: string }
 
+  - name: board
+    label: Board Page
+    files:
+      - name: board
+        label: Board Page
+        file: src/content/pages/board.md
+        fields:
+          - { name: page_heading, label: Page Heading, widget: string }
+          - { name: page_intro, label: Intro Text, widget: string }
+
   - name: team
     label: Board Members
     folder: src/content/team

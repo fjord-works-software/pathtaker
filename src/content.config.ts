@@ -15,6 +15,8 @@ const team = defineCollection({
 const pages = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/pages' }),
   schema: z.object({
+    // board index
+    page_intro: z.string().optional(),
     // home
     intro_heading: z.string().optional(),
     intro_body: z.string().optional(),

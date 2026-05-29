@@ -1,0 +1,43 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const entry = await getEntry('pages', 'board');
+const heading = entry?.data.page_heading ?? 'Meet the Board';
+const intro = entry?.data.page_intro ?? '';
+
+const members = (await getCollection('team')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title={heading}
+  description="Meet the Pathtaker board of directors — the dedicated leaders guiding our mission."
+>
+  <main class="w-full max-w-5xl mx-auto px-6 py-12 md:py-16">
+    <h1 class="text-4xl md:text-5xl mb-4">{heading}</h1>
+    {intro && <p class="text-brown/70 text-lg mb-12 tracking-body">{intro}</p>}
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      {members.map(member => (
+        <a
+          href={`/board/${member.id}`}
+          class="group flex flex-col items-center text-center gap-4 p-6 rounded-2xl border border-brown/10 hover:border-brown/30 hover:shadow-md transition-all duration-200"
+        >
+          <div class="w-40 h-40 rounded-full overflow-hidden shrink-0">
+            <img
+              src={member.data.photo}
+              alt={member.data.name}
+              class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
+              loading="lazy"
+            />
+          </div>
+          <div>
+            <p class="font-heading text-xl text-brown">{member.data.name}</p>
+            <p class="text-sm text-brown/60 tracking-body mt-1">{member.data.title}</p>
+          </div>
+          <span class="text-sm text-brown/50 tracking-body group-hover:text-brown transition-colors">View profile →</span>
+        </a>
+      ))}
+    </div>
+  </main>
+</BaseLayout>
