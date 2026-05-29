@@ -48,7 +48,9 @@ const navLinks = [
       <a href={href} class="py-3 text-brown border-b border-brown/10 tracking-body">{label}</a>
     ))}
 
-    <a href={url('/donate')} class="py-3 text-brown border-b border-brown/10 tracking-body">Donate</a>
+    <div class="py-3 border-b border-brown/10 flex items-center">
+      <a href={url('/donate')} class="bg-brown text-cream px-5 py-2 rounded-pill text-sm tracking-body hover:bg-brown-dark transition-colors">Donate</a>
+    </div>
 
     <a href={url('/board')} class="py-3 text-brown border-b border-brown/10 tracking-body">Meet The Board</a>
   </nav>
