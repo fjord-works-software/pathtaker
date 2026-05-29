@@ -1,0 +1,31 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ImageWithText from '../../components/ImageWithText.astro';
+
+export async function getStaticPaths() {
+  const members = await getCollection('team');
+  return members.map(member => ({
+    params: { slug: member.id },
+    props: { member },
+  }));
+}
+
+const { member } = Astro.props;
+const { Content } = await render(member);
+---
+
+<BaseLayout
+  title={member.data.name}
+  description={`Meet ${member.data.name} — ${member.data.title} at Pathtaker.`}
+>
+  <main>
+    <ImageWithText src={member.data.photo} alt={member.data.name} imageLeft={member.data.image_left}>
+      <h1 class="text-3xl md:text-4xl mb-3">{member.data.name}</h1>
+      <p class="text-lg mb-4 text-brown/70">{member.data.title}</p>
+      <div class="leading-relaxed space-y-4">
+        <Content />
+      </div>
+    </ImageWithText>
+  </main>
+</BaseLayout>

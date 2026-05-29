@@ -7,6 +7,8 @@ const team = defineCollection({
     name: z.string(),
     title: z.string(),
     photo: z.string(),
+    image_left: z.boolean().optional().default(true),
+    order: z.number().optional().default(99),
   }),
 });
 

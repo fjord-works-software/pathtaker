@@ -1,16 +1,16 @@
 ---
+import { getCollection } from 'astro:content';
+
 const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'Services', href: '/services' },
   { label: 'Contact', href: '/contact' },
 ];
 
-const boardLinks = [
-  { label: 'Board President and CEO', href: '/president' },
-  { label: 'Vice President', href: '/vice-president' },
-  { label: 'Secretary', href: '/secretary' },
-  { label: 'Treasurer', href: '/treasurer' },
-];
+const teamMembers = await getCollection('team');
+const boardLinks = teamMembers
+  .sort((a, b) => a.data.order - b.data.order)
+  .map(m => ({ label: m.data.title, href: `/board/${m.id}` }));
 ---
 
 <header class="sticky top-0 z-50 bg-cream border-b border-brown/20">

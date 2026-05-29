@@ -63,11 +63,13 @@ collections:
   - name: team
     label: Board Members
     folder: src/content/team
-    create: false
+    create: true
     extension: md
     format: frontmatter
     fields:
       - { name: name, label: Name, widget: string }
       - { name: title, label: Title, widget: string }
       - { name: photo, label: Photo, widget: image }
+      - { name: order, label: Nav Order, widget: number, default: 99 }
+      - { name: image_left, label: Image on Left, widget: boolean, default: true }
       - { name: body, label: Bio, widget: markdown }
