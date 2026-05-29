@@ -47,6 +47,25 @@ collections:
           - { name: quote, label: Quote, widget: text }
           - { name: body, label: Services Content, widget: markdown }
 
+  - name: contact
+    label: Contact Page
+    files:
+      - name: contact
+        label: Contact Page
+        file: src/content/pages/contact.md
+        fields:
+          - { name: access_key, label: Web3Forms Access Key, widget: string }
+          - { name: subject, label: Email Subject, widget: string }
+          - { name: name_label, label: Name Field Label, widget: string }
+          - { name: name_placeholder, label: Name Field Placeholder, widget: string }
+          - { name: email_label, label: Email Field Label, widget: string }
+          - { name: email_placeholder, label: Email Field Placeholder, widget: string }
+          - { name: phone_label, label: Phone Field Label, widget: string }
+          - { name: phone_placeholder, label: Phone Field Placeholder, widget: string }
+          - { name: message_label, label: Message Field Label, widget: string }
+          - { name: message_placeholder, label: Message Field Placeholder, widget: string }
+          - { name: submit_label, label: Submit Button Label, widget: string }
+
   - name: donate
     label: Donate Page
     files:

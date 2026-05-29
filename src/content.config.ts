@@ -29,6 +29,18 @@ const pages = defineCollection({
     donate_disclaimer: z.string().optional(),
     paypal_button_id: z.string().optional(),
     donate_button_label: z.string().optional(),
+    // contact
+    access_key: z.string().optional(),
+    subject: z.string().optional(),
+    name_label: z.string().optional(),
+    name_placeholder: z.string().optional(),
+    email_label: z.string().optional(),
+    email_placeholder: z.string().optional(),
+    phone_label: z.string().optional(),
+    phone_placeholder: z.string().optional(),
+    message_label: z.string().optional(),
+    message_placeholder: z.string().optional(),
+    submit_label: z.string().optional(),
   }),
 });
 

@@ -1,6 +1,18 @@
 ---
+import { getEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.astro';
+
+const entry = await getEntry('pages', 'contact');
+if (!entry) throw new Error('Missing content: pages/contact.md');
+const {
+  access_key, subject,
+  name_label, name_placeholder,
+  email_label, email_placeholder,
+  phone_label, phone_placeholder,
+  message_label, message_placeholder,
+  submit_label,
+} = entry.data;
 ---
 
 <BaseLayout
@@ -9,6 +21,18 @@ import ContactForm from '../components/ContactForm.astro';
 >
   <main class="w-full max-w-4xl mx-auto px-6 py-12 md:py-16">
     <h1 class="text-4xl md:text-5xl mb-10">Contact</h1>
-    <ContactForm />
+    <ContactForm
+      accessKey={access_key}
+      subject={subject}
+      nameLabel={name_label}
+      namePlaceholder={name_placeholder}
+      emailLabel={email_label}
+      emailPlaceholder={email_placeholder}
+      phoneLabel={phone_label}
+      phonePlaceholder={phone_placeholder}
+      messageLabel={message_label}
+      messagePlaceholder={message_placeholder}
+      submitLabel={submit_label}
+    />
   </main>
 </BaseLayout>
