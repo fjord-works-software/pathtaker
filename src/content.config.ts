@@ -38,7 +38,8 @@ const pages = defineCollection({
     donate_heading: z.string().optional(),
     donate_intro: z.string().optional(),
     donate_disclaimer: z.string().optional(),
-    paypal_button_id: z.string().optional(),
+    zeffy_form_url: z.string().optional(),
+    zeffy_display: z.enum(['button', 'embed']).optional(),
     donate_button_label: z.string().optional(),
     // contact
     access_key: z.string().optional(),

@@ -90,8 +90,21 @@ collections:
           - { name: donate_heading, label: Heading, widget: string }
           - { name: donate_intro, label: Intro Paragraph, widget: text }
           - { name: donate_disclaimer, label: Disclaimer, widget: string }
-          - { name: paypal_button_id, label: PayPal Button ID, widget: string }
-          - { name: donate_button_label, label: Button Label, widget: string }
+          - name: zeffy_form_url
+            label: Zeffy Form URL
+            widget: string
+            hint: >-
+              Paste the share link from Zeffy (e.g.
+              https://www.zeffy.com/en-US/donation-form/your-form). The embed
+              version is generated automatically.
+          - name: zeffy_display
+            label: How to Show the Donation Form
+            widget: select
+            default: button
+            options:
+              - { label: "Button linking to Zeffy", value: button }
+              - { label: "Embedded form on this page", value: embed }
+          - { name: donate_button_label, label: Button Label, widget: string, required: false }
 
   - name: board
     label: Board Page
