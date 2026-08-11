@@ -4,15 +4,37 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const entry = await getEntry('pages', 'donate');
 if (!entry) throw new Error('Missing content: pages/donate.md');
-const { donate_heading, donate_intro, donate_disclaimer, zeffy_form_url, zeffy_display, donate_button_label } = entry.data;
+const {
+  donate_heading,
+  donate_intro,
+  donate_disclaimer,
+  zeffy_display,
+  campaigns,
+  zeffy_form_url,
+  donate_button_label,
+} = entry.data;
 
 // Zeffy share links look like https://www.zeffy.com/en-US/donation-form/<slug>;
 // the embeddable version is the same path with /embed inserted and no locale.
-const embedUrl = zeffy_form_url
-  ?.replace(/\/(?:[a-z]{2}-[A-Z]{2})(?=\/)/, '')
-  .replace(/zeffy\.com\/(?!embed\/)/, 'zeffy.com/embed/');
+const toEmbedUrl = (formUrl: string) =>
+  formUrl
+    .replace(/\/(?:[a-z]{2}-[A-Z]{2})(?=\/)/, '')
+    .replace(/zeffy\.com\/(?!embed\/)/, 'zeffy.com/embed/');
+
+// Prefer the campaigns list; fall back to the legacy single-campaign fields so
+// an un-migrated donate.md still renders.
+const list = (campaigns ?? []).filter((c) => c.zeffy_form_url);
+if (!list.length && zeffy_form_url) {
+  list.push({
+    title: donate_heading ?? 'Donate',
+    description: '',
+    zeffy_form_url,
+    button_label: donate_button_label,
+  });
+}
 
 const showEmbed = zeffy_display === 'embed';
+const showTabs = list.length > 1;
 ---
 
 <BaseLayout
@@ -26,24 +48,124 @@ const showEmbed = zeffy_display === 'embed';
 
     <p class="leading-relaxed text-brown/70 mb-12">{donate_disclaimer}</p>
 
-    {zeffy_form_url && (showEmbed ? (
-      <div class="relative w-full overflow-hidden rounded-2xl" style="padding-top: 125%;">
-        <iframe
-          title="Donation form powered by Zeffy"
-          src={embedUrl}
-          class="absolute inset-0 w-full h-full border-0"
-          allowtransparency="true"
-        ></iframe>
+    {list.length > 0 && (
+      <div id="campaigns">
+        {showTabs && (
+          <div
+            role="tablist"
+            aria-label="Donation campaigns"
+            class="flex flex-wrap justify-center gap-x-8 gap-y-2 mb-10 border-b border-brown/10"
+          >
+            {list.map((campaign, i) => (
+              <button
+                type="button"
+                role="tab"
+                id={`campaign-tab-${i}`}
+                aria-controls={`campaign-panel-${i}`}
+                aria-selected={i === 0 ? 'true' : 'false'}
+                tabindex={i === 0 ? 0 : -1}
+                class:list={[
+                  'font-heading cursor-pointer bg-transparent px-1 pb-3 -mb-px text-base tracking-body border-b-2 transition-colors',
+                  i === 0
+                    ? 'border-brown text-brown'
+                    : 'border-transparent text-brown/60 hover:text-brown',
+                ]}
+              >
+                {campaign.title}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {list.map((campaign, i) => (
+          <div
+            role="tabpanel"
+            id={`campaign-panel-${i}`}
+            aria-labelledby={showTabs ? `campaign-tab-${i}` : undefined}
+            tabindex="0"
+            hidden={i !== 0}
+          >
+            {showTabs && (
+              <h2 class="text-2xl md:text-3xl mb-4">{campaign.title}</h2>
+            )}
+
+            {campaign.description && (
+              <p class="leading-relaxed mb-8">{campaign.description}</p>
+            )}
+
+            {showEmbed ? (
+              <div class="relative w-full overflow-hidden rounded-2xl" style="padding-top: 125%;">
+                <iframe
+                  title={`Donation form for ${campaign.title}, powered by Zeffy`}
+                  src={i === 0 ? toEmbedUrl(campaign.zeffy_form_url) : undefined}
+                  data-src={toEmbedUrl(campaign.zeffy_form_url)}
+                  class="absolute inset-0 w-full h-full border-0"
+                  allowtransparency="true"
+                ></iframe>
+              </div>
+            ) : (
+              <a
+                href={campaign.zeffy_form_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-heading inline-block bg-brown text-cream px-10 py-4 rounded-pill text-base tracking-body hover:bg-brown-dark transition-colors"
+              >
+                {campaign.button_label || 'Donate'}
+              </a>
+            )}
+          </div>
+        ))}
       </div>
-    ) : (
-      <a
-        href={zeffy_form_url}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="font-heading inline-block bg-brown text-cream px-10 py-4 rounded-pill text-base tracking-body hover:bg-brown-dark transition-colors"
-      >
-        {donate_button_label}
-      </a>
-    ))}
+    )}
   </main>
 </BaseLayout>
+
+<script>
+  const root = document.getElementById('campaigns');
+  const tabs = Array.from(root?.querySelectorAll<HTMLButtonElement>('[role="tab"]') ?? []);
+
+  function select(index: number, focus = true) {
+    tabs.forEach((tab, i) => {
+      const active = i === index;
+      const panel = document.getElementById(tab.getAttribute('aria-controls') ?? '');
+
+      tab.setAttribute('aria-selected', String(active));
+      tab.tabIndex = active ? 0 : -1;
+      tab.classList.toggle('border-brown', active);
+      tab.classList.toggle('text-brown', active);
+      tab.classList.toggle('border-transparent', !active);
+      tab.classList.toggle('text-brown/60', !active);
+      tab.classList.toggle('hover:text-brown', !active);
+
+      if (panel) panel.hidden = !active;
+
+      // Load each embed only once it is first shown, so switching back is instant.
+      if (active) {
+        const frame = panel?.querySelector('iframe');
+        if (frame && !frame.getAttribute('src')) {
+          frame.src = frame.dataset.src ?? '';
+        }
+      }
+    });
+
+    if (focus) tabs[index]?.focus();
+  }
+
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => select(i, false));
+
+    tab.addEventListener('keydown', (event) => {
+      const keys: Record<string, number> = {
+        ArrowRight: (i + 1) % tabs.length,
+        ArrowLeft: (i - 1 + tabs.length) % tabs.length,
+        Home: 0,
+        End: tabs.length - 1,
+      };
+
+      if (event.key in keys) {
+        event.preventDefault();
+        select(keys[event.key]);
+      }
+    });
+  });
+</script>
