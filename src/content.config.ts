@@ -38,8 +38,15 @@ const pages = defineCollection({
     donate_heading: z.string().optional(),
     donate_intro: z.string().optional(),
     donate_disclaimer: z.string().optional(),
-    zeffy_form_url: z.string().optional(),
     zeffy_display: z.enum(['button', 'embed']).optional(),
+    campaigns: z.array(z.object({
+      title: z.string(),
+      description: z.string().optional(),
+      zeffy_form_url: z.string(),
+      button_label: z.string().optional(),
+    })).optional(),
+    // legacy single-campaign fields, still honored as a fallback
+    zeffy_form_url: z.string().optional(),
     donate_button_label: z.string().optional(),
     // contact
     access_key: z.string().optional(),
