@@ -23,120 +23,110 @@ backend:
 media_folder: public/images
 public_folder: /images
 
-collections:
+# One-off pages live under `singletons` (a Sveltia feature) rather than
+# single-file `collections`. Sveltia lists each one directly in the sidebar, so
+# clicking "Home Page" opens its editor instead of a one-item list you have to
+# click through. Requires Sveltia CMS — Decap ignores this key.
+singletons:
   - name: home
-    label: Home Page
-    files:
-      - name: home
-        label: Home Page
-        file: src/content/pages/home.md
-        fields:
-          - { name: intro_heading, label: Welcome Heading, widget: string }
-          - { name: intro_body, label: Welcome Body, widget: text }
-          - { name: image_text_heading, label: Image Section Heading, widget: string }
-          - { name: body, label: Image Section Body, widget: markdown }
+    label: Home
+    file: src/content/pages/home.md
+    fields:
+      - { name: intro_heading, label: Welcome Heading, widget: string }
+      - { name: intro_body, label: Welcome Body, widget: text }
+      - { name: image_text_heading, label: Image Section Heading, widget: string }
+      - { name: body, label: Image Section Body, widget: markdown }
 
   - name: services
-    label: Services Page
-    files:
+    label: Services
+    file: src/content/pages/services.md
+    fields:
+      - { name: page_heading, label: Page Heading, widget: string }
+      - { name: tagline, label: Tagline, widget: string }
+      - { name: quote, label: Quote, widget: text }
+      - { name: approach_heading, label: Approach Section Heading, widget: string }
+      - { name: approach_intro, label: Approach Intro, widget: string }
+      - name: modalities
+        label: Therapy Modalities
+        widget: list
+        field: { name: modality, label: Modality, widget: string }
       - name: services
-        label: Services Page
-        file: src/content/pages/services.md
+        label: Services
+        widget: list
         fields:
-          - { name: page_heading, label: Page Heading, widget: string }
-          - { name: tagline, label: Tagline, widget: string }
-          - { name: quote, label: Quote, widget: text }
-          - { name: approach_heading, label: Approach Section Heading, widget: string }
-          - { name: approach_intro, label: Approach Intro, widget: string }
-          - name: modalities
-            label: Therapy Modalities
-            widget: list
-            field: { name: modality, label: Modality, widget: string }
-          - name: services
-            label: Services
-            widget: list
-            fields:
-              - { name: icon, label: Icon (emoji), widget: string, required: false }
-              - { name: name, label: Service Name, widget: string }
-              - { name: description, label: Description, widget: text }
-          - { name: cta, label: Call to Action Text, widget: string }
+          - { name: icon, label: Icon (emoji), widget: string, required: false }
+          - { name: name, label: Service Name, widget: string }
+          - { name: description, label: Description, widget: text }
+      - { name: cta, label: Call to Action Text, widget: string }
 
   - name: contact
-    label: Contact Page
-    files:
-      - name: contact
-        label: Contact Page
-        file: src/content/pages/contact.md
-        fields:
-          - { name: access_key, label: Web3Forms Access Key, widget: string }
-          - { name: subject, label: Email Subject, widget: string }
-          - { name: name_label, label: Name Field Label, widget: string }
-          - { name: name_placeholder, label: Name Field Placeholder, widget: string }
-          - { name: email_label, label: Email Field Label, widget: string }
-          - { name: email_placeholder, label: Email Field Placeholder, widget: string }
-          - { name: phone_label, label: Phone Field Label, widget: string }
-          - { name: phone_placeholder, label: Phone Field Placeholder, widget: string }
-          - { name: message_label, label: Message Field Label, widget: string }
-          - { name: message_placeholder, label: Message Field Placeholder, widget: string }
-          - { name: submit_label, label: Submit Button Label, widget: string }
+    label: Contact
+    file: src/content/pages/contact.md
+    fields:
+      - { name: access_key, label: Web3Forms Access Key, widget: string }
+      - { name: subject, label: Email Subject, widget: string }
+      - { name: name_label, label: Name Field Label, widget: string }
+      - { name: name_placeholder, label: Name Field Placeholder, widget: string }
+      - { name: email_label, label: Email Field Label, widget: string }
+      - { name: email_placeholder, label: Email Field Placeholder, widget: string }
+      - { name: phone_label, label: Phone Field Label, widget: string }
+      - { name: phone_placeholder, label: Phone Field Placeholder, widget: string }
+      - { name: message_label, label: Message Field Label, widget: string }
+      - { name: message_placeholder, label: Message Field Placeholder, widget: string }
+      - { name: submit_label, label: Submit Button Label, widget: string }
 
   - name: donate
-    label: Donate Page
-    files:
-      - name: donate
-        label: Donate Page
-        file: src/content/pages/donate.md
+    label: Donate
+    file: src/content/pages/donate.md
+    fields:
+      - { name: donate_heading, label: Heading, widget: string }
+      - { name: donate_intro, label: Intro Paragraph, widget: text }
+      - { name: donate_disclaimer, label: Disclaimer, widget: string }
+      - name: zeffy_display
+        label: How to Show the Donation Form
+        widget: select
+        default: button
+        options:
+          - { label: "Button linking to Zeffy", value: button }
+          - { label: "Embedded form on this page", value: embed }
+      - name: campaigns
+        label: Donation Campaigns
+        label_singular: Campaign
+        widget: list
+        summary: "{{fields.title}}"
+        hint: >-
+          Add one entry per Zeffy campaign. With two or more, visitors get a
+          row of tabs to switch between them. Drag to reorder — the first
+          campaign is the one shown by default.
         fields:
-          - { name: donate_heading, label: Heading, widget: string }
-          - { name: donate_intro, label: Intro Paragraph, widget: text }
-          - { name: donate_disclaimer, label: Disclaimer, widget: string }
-          - name: zeffy_display
-            label: How to Show the Donation Form
-            widget: select
-            default: button
-            options:
-              - { label: "Button linking to Zeffy", value: button }
-              - { label: "Embedded form on this page", value: embed }
-          - name: campaigns
-            label: Donation Campaigns
-            label_singular: Campaign
-            widget: list
-            summary: "{{fields.title}}"
+          - { name: title, label: Campaign Name, widget: string, hint: "Shown on the tab." }
+          - name: description
+            label: Description
+            widget: text
+            required: false
+            hint: Optional short blurb shown above the form or button.
+          - name: zeffy_form_url
+            label: Zeffy Form URL
+            widget: string
             hint: >-
-              Add one entry per Zeffy campaign. With two or more, visitors get a
-              row of tabs to switch between them. Drag to reorder — the first
-              campaign is the one shown by default.
-            fields:
-              - { name: title, label: Campaign Name, widget: string, hint: "Shown on the tab." }
-              - name: description
-                label: Description
-                widget: text
-                required: false
-                hint: Optional short blurb shown above the form or button.
-              - name: zeffy_form_url
-                label: Zeffy Form URL
-                widget: string
-                hint: >-
-                  Paste the share link from Zeffy (e.g.
-                  https://www.zeffy.com/en-US/donation-form/your-form). The embed
-                  version is generated automatically.
-              - name: button_label
-                label: Button Label
-                widget: string
-                required: false
-                default: Donate
-                hint: Only used when the form is shown as a button. Defaults to "Donate".
+              Paste the share link from Zeffy (e.g.
+              https://www.zeffy.com/en-US/donation-form/your-form). The embed
+              version is generated automatically.
+          - name: button_label
+            label: Button Label
+            widget: string
+            required: false
+            default: Donate
+            hint: Only used when the form is shown as a button. Defaults to "Donate".
 
   - name: board
-    label: Board Page
-    files:
-      - name: board
-        label: Board Page
-        file: src/content/pages/board.md
-        fields:
-          - { name: page_heading, label: Page Heading, widget: string }
-          - { name: page_intro, label: Intro Text, widget: string }
+    label: Board
+    file: src/content/pages/board.md
+    fields:
+      - { name: page_heading, label: Page Heading, widget: string }
+      - { name: page_intro, label: Intro Text, widget: string }
 
+collections:
   - name: team
     label: Board Members
     folder: src/content/team
