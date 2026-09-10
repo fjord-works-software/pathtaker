@@ -9,7 +9,7 @@ campaigns:
     zeffy_form_url: https://www.zeffy.com/en-US/donation-form/support-the-pathtaker-mission
     button_label: Donate
   - title: Pathtaker Merch
-    description: ''
+    description: Pathtaker’s Shop is a way for you to support the mission of Pathtaker and each "purchase" is a full donation and get some cool Swag
     zeffy_form_url: https://www.zeffy.com/en-US/ticketing/pathtakers-shop
     button_label: Donate
   - title: Intensives
