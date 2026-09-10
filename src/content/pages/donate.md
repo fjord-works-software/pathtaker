@@ -8,4 +8,8 @@ campaigns:
     description: ''
     zeffy_form_url: https://www.zeffy.com/en-US/donation-form/support-the-pathtaker-mission
     button_label: Donate
+  - title: Pathtaker Merch
+    description: ''
+    zeffy_form_url: https://www.zeffy.com/en-US/ticketing/pathtakers-shop
+    button_label: Donate
 ---
