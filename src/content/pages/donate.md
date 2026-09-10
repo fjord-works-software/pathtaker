@@ -12,4 +12,8 @@ campaigns:
     description: ''
     zeffy_form_url: https://www.zeffy.com/en-US/ticketing/pathtakers-shop
     button_label: Donate
+  - title: Intensives
+    description: This donation goes directly to help fund a therapeutic intensive for an individual who needs additional help beyond the typical 1 hour therapy session
+    zeffy_form_url: https://www.zeffy.com/en-US/donation-form/therapeutic-intensives
+    button_label: Donate
 ---
