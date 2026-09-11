@@ -59,30 +59,40 @@ const showTabs = list.length > 1;
     {list.length > 0 && (
       <div id="campaigns">
         {showTabs && (
-          <div
-            role="tablist"
-            aria-label="Donation campaigns"
-            class="flex flex-wrap justify-center gap-x-8 gap-y-2 mb-10 border-b border-brown/10"
-          >
-            {list.map((campaign, i) => (
-              <button
-                type="button"
-                role="tab"
-                id={`campaign-tab-${i}`}
-                aria-controls={`campaign-panel-${i}`}
-                aria-selected={i === 0 ? 'true' : 'false'}
-                tabindex={i === 0 ? 0 : -1}
-                class:list={[
-                  'font-heading cursor-pointer bg-transparent px-1 pb-3 -mb-px text-base tracking-body border-b-2 transition-colors',
-                  i === 0
-                    ? 'border-brown text-brown'
-                    : 'border-transparent text-brown/60 hover:text-brown',
-                ]}
+          <>
+            <p id="campaigns-label" class="text-sm uppercase tracking-widest text-brown/70 mb-3">
+              Choose a campaign
+            </p>
+            {/* On phones the tabs split the row evenly and long titles wrap inside
+                their tab. Sideways scrolling (with the script fading whichever edge
+                has tabs hidden past it) only kicks in if there are too many to fit. */}
+            <div data-tab-scroller class="tab-scroller overflow-x-auto p-1 scroll-px-8 mb-10">
+              <div
+                role="tablist"
+                aria-labelledby="campaigns-label"
+                class="flex min-w-min items-end justify-center gap-x-3 sm:gap-x-8 border-b border-brown/30"
               >
-                {campaign.title}
-              </button>
-            ))}
-          </div>
+                {list.map((campaign, i) => (
+                  <button
+                    type="button"
+                    role="tab"
+                    id={`campaign-tab-${i}`}
+                    aria-controls={`campaign-panel-${i}`}
+                    aria-selected={i === 0 ? 'true' : 'false'}
+                    tabindex={i === 0 ? 0 : -1}
+                    class:list={[
+                      'font-heading flex-1 sm:flex-none sm:whitespace-nowrap text-balance cursor-pointer bg-transparent rounded-sm px-1 pb-3 -mb-px text-sm sm:text-base leading-snug tracking-body border-b-3 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brown',
+                      i === 0
+                        ? 'border-brown text-brown'
+                        : 'border-transparent text-brown/80 hover:text-brown',
+                    ]}
+                  >
+                    {campaign.title}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </>
         )}
 
         {list.map((campaign, i) => (
@@ -145,10 +155,11 @@ const showTabs = list.length > 1;
       tab.classList.toggle('border-brown', active);
       tab.classList.toggle('text-brown', active);
       tab.classList.toggle('border-transparent', !active);
-      tab.classList.toggle('text-brown/60', !active);
+      tab.classList.toggle('text-brown/80', !active);
       tab.classList.toggle('hover:text-brown', !active);
 
       if (panel) panel.hidden = !active;
+      if (active) tab.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
 
       // Load each embed only once it is first shown, so switching back is instant.
       if (active) {
@@ -160,6 +171,23 @@ const showTabs = list.length > 1;
     });
 
     if (focus) tabs[index]?.focus();
+  }
+
+  const scroller = root?.querySelector<HTMLElement>('[data-tab-scroller]');
+
+  function updateFades() {
+    if (!scroller) return;
+    const { scrollLeft, scrollWidth, clientWidth } = scroller;
+    scroller.toggleAttribute('data-more-left', scrollLeft > 1);
+    scroller.toggleAttribute('data-more-right', scrollLeft + clientWidth < scrollWidth - 1);
+  }
+
+  if (scroller) {
+    scroller.addEventListener('scroll', updateFades, { passive: true });
+    // Watch the tab row too: web fonts loading in can change whether it overflows.
+    const observer = new ResizeObserver(updateFades);
+    observer.observe(scroller);
+    if (scroller.firstElementChild) observer.observe(scroller.firstElementChild);
   }
 
   tabs.forEach((tab, i) => {
@@ -180,3 +208,30 @@ const showTabs = list.length > 1;
     });
   });
 </script>
+
+<style>
+  .tab-scroller {
+    --fade-left: 0px;
+    --fade-right: 0px;
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 var(--fade-left),
+      #000 calc(100% - var(--fade-right)),
+      transparent
+    );
+    scrollbar-width: none;
+  }
+
+  .tab-scroller::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab-scroller[data-more-left] {
+    --fade-left: 2.5rem;
+  }
+
+  .tab-scroller[data-more-right] {
+    --fade-right: 2.5rem;
+  }
+</style>
