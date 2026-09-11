@@ -41,12 +41,20 @@ const showTabs = list.length > 1;
   title="Donate"
   description="Support Pathtaker's mission of providing mental health intensives to those who need deeper healing."
 >
-  <main class="w-full max-w-2xl mx-auto px-6 py-12 md:py-20 text-center">
-    <h1 class="text-4xl md:text-5xl mb-6">{donate_heading}</h1>
+  <main
+    class:list={[
+      'w-full mx-auto px-6 py-12 md:py-20 text-center',
+      // Embedded forms need room to breathe; keep the copy column narrow below.
+      showEmbed ? 'max-w-4xl' : 'max-w-2xl',
+    ]}
+  >
+    <div class="max-w-2xl mx-auto">
+      <h1 class="text-4xl md:text-5xl mb-6">{donate_heading}</h1>
 
-    <p class="text-lg leading-relaxed mb-4">{donate_intro}</p>
+      <p class="text-lg leading-relaxed mb-4">{donate_intro}</p>
 
-    <p class="leading-relaxed text-brown/70 mb-12">{donate_disclaimer}</p>
+      <p class="leading-relaxed text-brown/70 mb-12">{donate_disclaimer}</p>
+    </div>
 
     {list.length > 0 && (
       <div id="campaigns">
@@ -90,11 +98,14 @@ const showTabs = list.length > 1;
             )}
 
             {campaign.description && (
-              <p class="leading-relaxed mb-8">{campaign.description}</p>
+              <p class="leading-relaxed mb-8 max-w-2xl mx-auto">{campaign.description}</p>
             )}
 
             {showEmbed ? (
-              <div class="relative w-full overflow-hidden rounded-2xl" style="padding-top: 125%;">
+              <div
+                class="relative w-full overflow-hidden rounded-2xl"
+                style="height: clamp(480px, 125vw, 960px);"
+              >
                 <iframe
                   title={`Donation form for ${campaign.title}, powered by Zeffy`}
                   src={i === 0 ? toEmbedUrl(campaign.zeffy_form_url) : undefined}
