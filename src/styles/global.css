@@ -1,14 +1,16 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* Token names must use Tailwind v4 namespaces (--color-*, --font-*, --radius-*,
+   --tracking-*) or no utility class is generated for them. */
 @theme {
   --color-cream: #FDFBF6;
   --color-brown: #72513C;
   --color-brown-dark: #562c1c;
-  --font-family-body: 'Figtree', sans-serif;
-  --font-family-heading: 'Libre Baskerville', serif;
+  --font-body: 'Figtree', sans-serif;
+  --font-heading: 'Libre Baskerville', serif;
   --radius-pill: 40px;
-  --letter-spacing-body: 0.06rem;
+  --tracking-body: 0.06rem;
 }
 
 @font-face {
@@ -58,9 +60,9 @@
   }
 
   body {
-    font-family: var(--font-family-body);
+    font-family: var(--font-body);
     font-weight: 400;
-    letter-spacing: var(--letter-spacing-body);
+    letter-spacing: var(--tracking-body);
     min-height: 100vh;
     display: grid;
     grid-template-rows: auto 1fr auto;
@@ -69,7 +71,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-family-heading);
+    font-family: var(--font-heading);
     font-weight: 400;
     color: var(--color-brown);
   }

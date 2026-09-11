@@ -70,7 +70,7 @@ const showTabs = list.length > 1;
               <div
                 role="tablist"
                 aria-labelledby="campaigns-label"
-                class="flex min-w-min items-end justify-center gap-x-3 sm:gap-x-8 border-b border-brown/30"
+                class="flex min-w-min items-end justify-center gap-x-2 sm:gap-x-8 border-b border-brown/30"
               >
                 {list.map((campaign, i) => (
                   <button
@@ -81,7 +81,7 @@ const showTabs = list.length > 1;
                     aria-selected={i === 0 ? 'true' : 'false'}
                     tabindex={i === 0 ? 0 : -1}
                     class:list={[
-                      'font-heading flex-1 sm:flex-none sm:whitespace-nowrap text-balance cursor-pointer bg-transparent rounded-sm px-1 pb-3 -mb-px text-sm sm:text-base leading-snug tracking-body border-b-3 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brown',
+                      'font-heading flex-1 sm:flex-none sm:whitespace-nowrap text-balance cursor-pointer bg-transparent rounded-sm px-0.5 sm:px-1 pb-3 -mb-px text-sm sm:text-base leading-snug tracking-body border-b-3 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brown',
                       i === 0
                         ? 'border-brown text-brown'
                         : 'border-transparent text-brown/80 hover:text-brown',

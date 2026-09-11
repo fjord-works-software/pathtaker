@@ -20,8 +20,9 @@ The CMS admin is available at `/admin` when running `dev:all`.
 
 **Styling**: Tailwind CSS v4 via `@tailwindcss/vite` (no `tailwind.config.*` file). Custom design tokens are defined in `src/styles/global.css` inside `@theme {}`:
 - `--color-cream`, `--color-brown`, `--color-brown-dark`
-- `--font-family-body` (Figtree), `--font-family-heading` (Libre Baskerville)
-- `--radius-pill`, `--letter-spacing-body`
+- `--font-body` (Figtree), `--font-heading` (Libre Baskerville) → `font-body` / `font-heading` utilities
+- `--radius-pill`, `--tracking-body` → `rounded-pill` / `tracking-body` utilities
+- Token names must use Tailwind v4 namespaces (`--color-*`, `--font-*`, `--radius-*`, `--tracking-*`); v3-style names like `--font-family-*` silently generate no utility class
 - Global base styles set body font, heading font, and a CSS Grid body layout (`grid-template-rows: auto 1fr auto`)
 
 **Content**: Astro Content Layer API (`getCollection`, `getEntry`, `render`). Two collections defined in `src/content.config.ts`:
@@ -36,7 +37,7 @@ The CMS admin is available at `/admin` when running `dev:all`.
 
 **Every internal `href` and asset `src`** must be wrapped: `url('/services')`, `url('/images/foo.jpg')`. The helper reads `import.meta.env.BASE_URL` at build time. Content-derived paths (e.g. `member.data.photo` from frontmatter) also need wrapping at the call site, not inside components.
 
-**Heading fonts are global** — `h1`–`h6` already get `font-family: var(--font-family-heading)` from `global.css`. Don't add `font-heading` to heading elements. Do add it to non-heading elements (`<p>`, `<a>`, `<span>`) that need the serif font.
+**Heading fonts are global** — `h1`–`h6` already get `font-family: var(--font-heading)` from `global.css`. Don't add `font-heading` to heading elements. Do add it to non-heading elements (`<p>`, `<a>`, `<span>`) that need the serif font.
 
 **Page layout pattern**: Each page `<main>` needs `w-full` alongside `max-w-*` and `mx-auto`. The CSS Grid body layout causes `mx-auto` without `w-full` to shrink-wrap content rather than fill the column.
 
